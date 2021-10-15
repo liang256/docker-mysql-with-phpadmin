@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: mysql_v5.7
+    image: mysql:5.7
+    platform: linux/amd64
+    ports:
+    - 3306:3306
+    restart: always
+    network_mode: bridge
+    environment:
+      MYSQL_ROOT_PASSWORD : root
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./conf:/etc/mysql
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin
+    platform: linux/amd64
+    restart: always
+    network_mode: bridge
+    environment:
+      PMA_HOST: 172.17.0.1:3306
+    ports:
+      - 8183:80
