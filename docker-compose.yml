@@ -10,15 +10,15 @@ services:
     restart: always
     network_mode: bridge
     environment:
-      MYSQL_ROOT_PASSWORD : root
+      MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./data:/var/lib/mysql
-      - ./conf:/etc/mysql
+      - ./conf/my.cnf:/etc/mysql/my.cnf
 
-  phpmyadmin:
+  phpmyadmin:s
     container_name: phpmyadmin
     image: phpmyadmin
-    platform: linux/amd64
+    # platform: linux/arm64
     restart: always
     network_mode: bridge
     environment:
