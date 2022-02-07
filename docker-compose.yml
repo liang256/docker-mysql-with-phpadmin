@@ -1,10 +1,8 @@
 version: '3'
-
 services:
-  mysql:
-    container_name: mysql_v5.7
+  db:
+    container_name: db
     image: mysql:5.7
-    platform: linux/amd64
     ports:
     - 3306:3306
     restart: always
@@ -14,14 +12,15 @@ services:
     volumes:
       - ./data:/var/lib/mysql
       - ./conf/my.cnf:/etc/mysql/my.cnf
-
-  phpmyadmin:s
+  phpmyadmin:
     container_name: phpmyadmin
-    image: phpmyadmin
+    image: phpmyadmin:5.0
     # platform: linux/arm64
     restart: always
     network_mode: bridge
     environment:
-      PMA_HOST: 172.17.0.1:3306
+      PMA_HOST: db
     ports:
-      - 8183:80
+      - 8183:80    
+    depends_on:
+      - db
