@@ -19,8 +19,6 @@ services:
     restart: always
     network_mode: bridge
     environment:
-      PMA_HOST: db
+      PMA_HOST: 172.17.0.1:3306
     ports:
       - 8183:80    
-    depends_on:
-      - db
